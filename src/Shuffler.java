@@ -7,7 +7,7 @@ public class Shuffler {
 	 * The number of consecutive shuffle steps to be performed in each call
 	 * to each sorting procedure.
 	 */
-	private static final int SHUFFLE_COUNT = 1;
+	private static final int SHUFFLE_COUNT = 4;
 
 
 	/**
@@ -40,6 +40,8 @@ public class Shuffler {
 			System.out.println();
 		}
 		System.out.println();
+		System.out.println(flip());
+		System.out.println(arePermutations(values1, values2));
 	}
 
 
@@ -50,6 +52,24 @@ public class Shuffler {
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
 	public static void perfectShuffle(int[] values) {
+		int[] shuffled = new int[values.length];
+		int k = 0;
+		for(int j = 0; j < values.length/2; j++){
+			shuffled[k] = values[j];
+			k+=2;
+		}
+
+		k = 1;
+		for(int j = values.length / 2; j < values.length; j++) {
+			shuffled[k] = values[j];
+			k+=2;
+		}
+
+
+		
+        	
+
+
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
 	}
 
@@ -65,6 +85,45 @@ public class Shuffler {
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
 	public static void selectionShuffle(int[] values) {
+
+		int[] shuffled = new int[values.length];
+
+		for(int k = values.length-1; k>= 0; k--){
+			int index = (int)(Math.random() * ((values.length)));
+			int first = values[k];
+			int second = values[index];
+			values[k] = second;
+			values[index]=  first;
+			}
+		
+
+	
+
+		
+
+		
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
 	}
+
+	public static boolean flip(){
+		int r = (int)(Math.random() * 3);
+		return r==1 || r==2;
+	}
+
+	public static boolean arePermutations(int[] a1, int[] a2){
+		boolean isPermutation = true;
+		for(int i : a1){
+			boolean isMatch = false;
+			for (int y : a2){
+				if(i == y){
+					isMatch = true;
+				}
+			}
+			if(!isMatch){
+				isPermutation = false;
+			}
+		}
+		return isPermutation;
+	}
 }
+
